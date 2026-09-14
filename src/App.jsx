@@ -13,7 +13,27 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const SECRET_ENDPOINT = 'Y2xvdWRieXRlaXNtaW5lbm9vbmVjYW5hY2Nlc3M=';
 
 export default function App() {
-  const [targetTime] = useState(() => Date.now() + FORTY_DAYS_MS);
+  // Persistent fixed target time across page refreshes
+  const [targetTime] = useState(() => {
+    try {
+      const saved = localStorage.getItem('cloudbyte_target_time');
+      if (saved) {
+        const parsed = Number(saved);
+        if (!isNaN(parsed) && parsed > Date.now()) {
+          return parsed;
+        }
+      }
+    } catch (err) {
+      console.error('Storage error:', err);
+    }
+    const newTarget = Date.now() + FORTY_DAYS_MS;
+    try {
+      localStorage.setItem('cloudbyte_target_time', String(newTarget));
+    } catch (err) {
+      console.error('Storage error:', err);
+    }
+    return newTarget;
+  });
   const [timeLeft, setTimeLeft] = useState({ days: 40, hours: 0, minutes: 0, seconds: 0 });
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
