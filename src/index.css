@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Kalam:wght@400;700&display=swap');
+
+:root {
+  --bg-pitch-black: #000000;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Mouse Cursor from /public/mouse.png */
+html, body, #root, *, button, input, select, textarea, a, label, .cursor-pointer {
+  cursor: url('/mouse.png') 0 0, auto !important;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100%;
+  background-color: #000000 !important;
+  color: #1e293b;
+  overflow-x: hidden;
+  overflow-y: auto;
+  user-select: none;
+}
+
+.font-display {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-mono {
+  font-family: 'Fira Code', monospace;
+}
+
+.font-handwriting {
+  font-family: 'Kalam', cursive, sans-serif;
+}
+
+/* Pure 100% Solid Pitch Black Canvas */
+.bg-pure-black {
+  background-color: #000000 !important;
+}
+
+/* 3D Perspective Stage */
+.perspective-stage {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+/* Warm Yellow Lined Notebook Paper Background (Exact Match to User Reference Photo) */
+.notebook-yellow-paper {
+  background-color: #fef08a; /* Warm yellow/cream paper */
+  background-image: 
+    linear-gradient(to bottom, transparent 23px, rgba(59, 130, 246, 0.3) 24px); /* Blue ruled notebook lines */
+  background-size: 100% 24px;
+}
+
+/* 4 Unique Character Color Card Gradients (8px Border Radius, Exact Match to Character Color Shades) */
+.cyan-pill-card {
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #0ea5e9 100%);
+  border-radius: 8px !important;
+  box-shadow: 
+    0 3px 0 #0369a1,
+    0 10px 25px rgba(0, 0, 0, 0.85),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.brown-pill-card {
+  background: linear-gradient(135deg, #78350f 0%, #a1552a 50%, #653315 100%);
+  border-radius: 8px !important;
+  box-shadow: 
+    0 3px 0 #451a03,
+    0 10px 25px rgba(0, 0, 0, 0.85),
+    inset 0 2px 4px rgba(255, 255, 255, 0.35);
+}
+
+.orange-pill-card {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
+  border-radius: 8px !important;
+  box-shadow: 
+    0 3px 0 #c2410c,
+    0 10px 25px rgba(0, 0, 0, 0.85),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.blue-pill-card {
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #60a5fa 100%);
+  border-radius: 8px !important;
+  box-shadow: 
+    0 3px 0 #1e40af,
+    0 10px 25px rgba(0, 0, 0, 0.85),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.green-pill-card {
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 50%, #84cc16 100%);
+  border-radius: 8px !important;
+  box-shadow: 
+    0 3px 0 #15803d,
+    0 10px 25px rgba(0, 0, 0, 0.85),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+
+
+/* Green Pill Digit Leaf Background */
+.green-pill-digit {
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 50%, #84cc16 100%);
+}
+
+/* Vertical 3D Book Page Y-Axis Rotate Keyframe Animation */
+@keyframes flipYAnimation {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+.animate-flip-y {
+  animation: flipYAnimation 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+
+/* 360 Degree Full Box Rotation Keyframe Animation */
+@keyframes spin360Box {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+.animate-rotate-360 {
+  animation: spin360Box 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+
+
+/* Book Spine Center Lighting */
+.notebook-spine-crease {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 28px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* 3D Realism Book Container with 8px Border Radius & Angled Perspective View */
+.notebook-3d-book {
+  transform-style: preserve-3d;
+  transform: rotateX(12deg) rotateY(-2deg);
+  border-radius: 8px;
+  box-shadow: 
+    0 35px 90px rgba(0, 0, 0, 0.95),
+    0 15px 30px rgba(0, 0, 0, 0.7);
+  transition: transform 0.4s ease-out;
+}
+
+/* Left Book Page 3D Bend (Hinged at spine, curving upward towards outer left edge) */
+.notebook-page-left-bend {
+  transform-origin: right center;
+  transform: rotateY(7deg);
+  box-shadow: 
+    inset -25px 0 40px rgba(0, 0, 0, 0.18),
+    inset 20px 0 30px rgba(255, 255, 255, 0.15);
+}
+
+/* Right Book Page 3D Bend (Hinged at spine, curving upward towards outer right edge) */
+.notebook-page-right-bend {
+  transform-origin: left center;
+  transform: rotateY(-7deg);
+  box-shadow: 
+    inset 25px 0 40px rgba(0, 0, 0, 0.18),
+    inset -20px 0 30px rgba(255, 255, 255, 0.15);
+}
+
+/* Layered Paper Edge Depth Underneath (Book Block Thickness) */
+.notebook-3d-book::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 6px;
+  right: 6px;
+  height: 8px;
+  background: linear-gradient(to bottom, #fef08a 0%, #eab308 30%, #ca8a04 60%, #78350f 100%);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+  z-index: -1;
+}
+
+/* 3D Hardcover Book Base Frame */
+.notebook-3d-book::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  background: linear-gradient(135deg, #451a03 0%, #1c0a00 100%);
+  border-radius: 11px;
+  z-index: -2;
+  box-shadow: 0 30px 75px rgba(0,0,0,0.95), 0 0 20px rgba(0,0,0,0.8);
+}
+
+
+
+
