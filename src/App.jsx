@@ -22,16 +22,18 @@ export default function App() {
 
   // Route state to check if user is visiting the secret admin endpoint
   const [currentRoute, setCurrentRoute] = useState(() => {
-    const path = window.location.pathname.replace(/^\//, '');
-    const hash = window.location.hash.replace(/^#\/?/, '');
-    return path || hash;
+    const path = window.location.pathname;
+    const hash = window.location.hash;
+    const href = window.location.href;
+    return `${path} ${hash} ${href}`;
   });
 
   useEffect(() => {
     const handleRouteChange = () => {
-      const path = window.location.pathname.replace(/^\//, '');
-      const hash = window.location.hash.replace(/^#\/?/, '');
-      setCurrentRoute(path || hash);
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      const href = window.location.href;
+      setCurrentRoute(`${path} ${hash} ${href}`);
     };
 
     window.addEventListener('popstate', handleRouteChange);
@@ -42,7 +44,12 @@ export default function App() {
     };
   }, []);
 
-  const isAdminRoute = currentRoute.includes(SECRET_ENDPOINT) || currentRoute.includes('cloudbyteisminenonecanaccess');
+  const isAdminRoute =
+    currentRoute.includes(SECRET_ENDPOINT) ||
+    currentRoute.includes('cloudbyteisminenonecanaccess') ||
+    window.location.href.includes(SECRET_ENDPOINT) ||
+    window.location.pathname.includes(SECRET_ENDPOINT) ||
+    window.location.hash.includes(SECRET_ENDPOINT);
 
   // Persistent subscribers stored in localStorage
   const [subscribers, setSubscribers] = useState(() => {
