@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && rm -f dist/_redirects public/_redirects",
-    "postbuild": "rm -f dist/_redirects public/_redirects",
+    "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },
