@@ -13,6 +13,15 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const SECRET_ENDPOINT = 'Y2xvdWRieXRlaXNtaW5lbm9vbmVjYW5hY2Nlc3M=';
 
 export default function App() {
+  // Ensure any old cached target timestamp is removed from browser storage
+  useEffect(() => {
+    try {
+      localStorage.removeItem('cloudbyte_target_time');
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
   const [timeLeft, setTimeLeft] = useState(() => {
     const diff = Math.max(0, LAUNCH_TARGET_TIME - Date.now());
     return {
