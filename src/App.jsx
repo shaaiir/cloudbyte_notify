@@ -3,8 +3,8 @@ import { FlipDigit } from './components/FlipDigit';
 import { AdminPage } from './components/AdminPage';
 import { soundFx } from './utils/audio';
 
-// Fixed target time: exactly 40 days from launch
-const FORTY_DAYS_MS = 40 * 24 * 60 * 60 * 1000;
+// Official Synchronized Global Launch Target: October 31, 2026 00:00:00 UTC
+const LAUNCH_TARGET_TIME = new Date('2026-10-31T00:00:00Z').getTime();
 
 // Email format validation regex (strictly requires format like name@domain.com)
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -13,28 +13,15 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const SECRET_ENDPOINT = 'Y2xvdWRieXRlaXNtaW5lbm9vbmVjYW5hY2Nlc3M=';
 
 export default function App() {
-  // Persistent fixed target time across page refreshes
-  const [targetTime] = useState(() => {
-    try {
-      const saved = localStorage.getItem('cloudbyte_target_time');
-      if (saved) {
-        const parsed = Number(saved);
-        if (!isNaN(parsed) && parsed > Date.now()) {
-          return parsed;
-        }
-      }
-    } catch (err) {
-      console.error('Storage error:', err);
-    }
-    const newTarget = Date.now() + FORTY_DAYS_MS;
-    try {
-      localStorage.setItem('cloudbyte_target_time', String(newTarget));
-    } catch (err) {
-      console.error('Storage error:', err);
-    }
-    return newTarget;
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const diff = Math.max(0, LAUNCH_TARGET_TIME - Date.now());
+    return {
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / 1000 / 60) % 60),
+      seconds: Math.floor((diff / 1000) % 60)
+    };
   });
-  const [timeLeft, setTimeLeft] = useState({ days: 40, hours: 0, minutes: 0, seconds: 0 });
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -180,7 +167,7 @@ export default function App() {
 
   useEffect(() => {
     const updateCountdown = () => {
-      const diff = Math.max(0, targetTime - Date.now());
+      const diff = Math.max(0, LAUNCH_TARGET_TIME - Date.now());
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -198,7 +185,7 @@ export default function App() {
     updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
-  }, [targetTime]);
+  }, []);
 
   // IF VISITING SECRET ADMIN ENDPOINT (/Y2xvdWRieXRlaXNtaW5lbm9vbmVjYW5hY2Nlc3M=)
   if (isAdminRoute) {
