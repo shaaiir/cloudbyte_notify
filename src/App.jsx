@@ -221,7 +221,7 @@ export default function App() {
           {/* Circular MP4 Video Logo Container */}
           <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden flex items-center justify-center bg-black shrink-0 shadow-md">
             <video
-              src="/logo-cloudbyte.mp4"
+              src="/logo-cloudbyte.mp4?v=3"
               autoPlay
               loop
               muted
